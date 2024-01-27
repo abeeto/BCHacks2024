@@ -10,8 +10,8 @@ const WelcomePage = () => {
       };
   return (
     <div className="h-screen flex row items-center ">
-      <h1 className="pr-2">Welcome,</h1>
-      <Input className="border-0 border-b-2 border-blue-300 focus:none text-blue-300 focus-visible:ring-0 "
+      <div className="text-4xl pr-2">Welcome,</div>
+      <Input className="border-0 border-b-2 border-blue-300 focus:none text-blue-300 text-4xl focus-visible:ring-0 "
       placeholder="sexy" onChange={handleInputChange} />
     </div>
     

@@ -14,15 +14,6 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between pb-24">
       <WelcomePage/>
       <HobbyPage/>
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <Alert>
-            <AlertTitle>Heads up!</AlertTitle>
-            <AlertDescription>
-              You can add components and dependencies to your app using the cli.
-            </AlertDescription>
-        </Alert>
-        <CardDemo/>
-      </div>
     </main>
   );
 }

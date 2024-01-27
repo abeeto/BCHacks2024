@@ -10,8 +10,8 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { CardDemo } from "@/components/ui/card-demo";
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <WelcomePage/>
+    <main className="flex flex-col items-center justify-between pl-24">
+      <WelcomePage name="John" />
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <Alert>
             <AlertTitle>Heads up!</AlertTitle>

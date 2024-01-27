@@ -7,6 +7,7 @@ const WelcomePage = () => {
     const handleInputChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setName(e.target.value);
         console.log(name);
+        localStorage.setItem('name', e.target.value.toString());
       };
   return (
     <div className="h-screen flex row items-center ">

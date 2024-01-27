@@ -29,21 +29,21 @@ const pageStyles = {
 
 const HobbyTracker = () => {
   const [hobbies, setHobbies] = useState([
-    { name: 'working out', count: 100 },
-    { name: 'eating healthy', count: 100 },
-    { name: 'reading books', count: 100 },
+    { name: 'working out', count: 0 },
+    { name: 'eating healthy', count: 0 },
+    { name: 'reading books', count: 0 },
   ]);
 
   const addNewHobby = () => {
     // This is where you would add logic to input a new hobby
     // For now, we'll just add a placeholder hobby
-    const newHobby = { name: 'New Hobby', count: 100 };
+    const newHobby = { name: 'New Hobby', count: 0 };
     setHobbies([...hobbies, newHobby]);
   };
 
   return (
-    <div style={pageStyles}>
-      <h1 style={{ fontWeight: 'bold', fontSize: '32px' }}>Have you been...</h1>
+    <div style={pageStyles} className=".h-screen">
+      <p className ="align-top">Have you been...</p>
       <ul>
         {hobbies.map((hobby, index) => (
           <li key={index}>

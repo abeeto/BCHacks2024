@@ -8,6 +8,7 @@ import { NewHobbyDrawerProps } from "@/app/types/NewHobbyProps"
 import { HobbyFormProps } from "@/app/types/HobbyFormProps"
 
 
+
 export const NewHobbyDrawer: React.FC<NewHobbyDrawerProps> = ({ hobbies, setHobbies }) => {
   const [open, setOpen] = useState<boolean>(false);
 

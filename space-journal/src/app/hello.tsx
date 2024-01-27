@@ -1,11 +1,13 @@
 "use client"
 import { Input } from "@/components/ui/input"
 import React, {useState} from 'react';
+import { jumpToSection } from "@/Helpers/Helper";
 import './globals.css';
 const WelcomePage = () => {
     const [name, setName] = useState('');
     const handleInputChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setName(e.target.value);
+        jumpToSection("hobby")
         console.log(name);
       };
   return (

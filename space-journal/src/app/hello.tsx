@@ -4,13 +4,13 @@ import React, {useState} from 'react';
 import './globals.css';
 const WelcomePage = () => {
     const [name, setName] = useState('');
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setName(e.target.value);
       };
   return (
     <div className="welcome-container">
       <h1 className="welcome-text">Welcome,</h1>
-      <Input placeholder="sexy "/>
+      <Input onChange={handleInputChange} placeholder="sexy "/>
     </div>
     
   );

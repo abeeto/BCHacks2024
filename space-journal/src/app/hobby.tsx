@@ -6,7 +6,7 @@ const HobbyTracker = () => {
   const [hobbies, setHobbies] = useState([
     { name: 'working out', count: 9 },
     { name: 'eating healthy', count: 0 },
-    { name: 'reading books', count: 0 },
+    { name: 'reading books', count: 999 },
   ]);
   const updateStreakCount = (index: number, toAdd: boolean) => {
     const newHobbies = hobbies.map((hobby, i) => 

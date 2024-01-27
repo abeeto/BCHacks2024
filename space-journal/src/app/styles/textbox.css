@@ -1,0 +1,74 @@
+
+/* these are all styles for the journal textbox. It overwrites a bunch 
+of the default styles for the quill editor (specifically the "snow" styles). */
+
+:root {
+    /* colour of the toolbar text */
+    --toolbar-text-color:  rgb(96 165 250); 
+    /* colour of hover of toolbar text */
+    --toolbar-hover-color: rgb(96 165 250 / 50%);
+}
+
+#journal .ql-toolbar {
+    border-radius: 12px 12px 0 0;
+    border-color: lightgray !important;
+}
+
+#journal .ql-container {
+    border-radius: 0 0 12px 12px;
+    border-color: lightgray !important;
+}
+
+
+#journal .q1-formats {
+    color:var(--toolbar-text-color);
+}
+
+#journal .ql-snow .ql-stroke {
+    stroke: var(--toolbar-text-color);
+}
+
+#journal .ql-snow .ql-picker.ql-expanded .ql-picker-label {
+    color: var(--toolbar-text-color);
+}
+
+#journal .ql-snow .ql-picker.ql-expanded .ql-picker-item {
+    color: var(--toolbar-text-color);
+}
+
+#journal .ql-snow .ql-picker.ql-expanded .ql-picker-label svg {
+    fill: var(--toolbar-text-color);
+}
+#journal .ql-snow .ql-picker.ql-expanded .ql-picker-label svg:hover {
+    fill: var(--toolbar-hover-color);
+}
+
+#journal .ql-snow .ql-picker.ql-expanded .ql-picker-item.ql-selected,
+#journal .ql-snow .ql-picker.ql-expanded .ql-picker-item:hover {
+    color: var(--toolbar-text-color);
+}
+
+#journal .ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill {
+    fill: var(--toolbar-text-color);
+}
+#journal .ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill:hover {
+    fill: var(--toolbar-hover-color);
+}
+
+#journal .ql-snow .ql-picker {
+    color: var(--toolbar-text-color);
+    border-radius: 12px;
+}
+
+#journal .ql-snow .ql-picker.ql-expanded .ql-picker-label:hover {
+    color: var(--toolbar-hover-color);
+}
+
+#journal .ql-snow .ql-picker.ql-expanded .ql-picker-item:hover {
+    color: var(--toolbar-hover-color);
+}
+
+#journal .ql-snow .ql-picker.ql-expanded .ql-picker-item.ql-selected:hover,
+#journal .ql-snow .ql-picker.ql-expanded .ql-picker-item:hover {
+    color: var(--toolbar-hover-color);
+}

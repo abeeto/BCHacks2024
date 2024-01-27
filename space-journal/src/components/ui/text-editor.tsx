@@ -11,12 +11,12 @@ export default function TextEditor() {
                 [{ header: [1, 2, 3, false] }],
                 [{ 'font': [] }],
                 ['bold', 'italic', 'underline', 'strike'],
-                ['blockquote', 'code-block'],
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
                 ['link', 'image'],
                 [{ list: 'ordered' }, { list: 'bullet' }],
-                [{ 'script': 'sub' }, { 'script': 'super' }],
-                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
                 [{ 'align': [] }],
+                ['blockquote', 'code-block'],
+                [{ 'script': 'sub' }, { 'script': 'super' }],
                 ['clean'],
             ],
         };

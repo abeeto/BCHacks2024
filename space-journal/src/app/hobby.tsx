@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
-
+import { Card,CardHeader, CardDescription } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 const pageStyles = {
     height: '100vh',
     width: '100vw',
@@ -44,17 +45,14 @@ const HobbyTracker = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-between flex .h-screen">
       <div id="hobby" className="align-top"></div>
-      <p className ="align-top">Have you been...............................................................</p>
-      <ul>
-        {hobbies.map((hobby, index) => (
-          <li key={index}>
-            {hobby.name} x{hobby.count}
-          </li>
-        ))}
-      </ul>
-      <button onClick={addNewHobby} style={buttonStyles}>
-        New Hobby
-      </button>
+      <div className='flex flex-col'>
+        <div className ="text-4xl">Have you been..</div>
+          {hobbies.map((hobby, index) => (
+            <div key={index} className='text-m mt-6'>{hobby.name}</div>
+          ))}
+          <Button onClick={addNewHobby} className="mt-5">Add new hobby</Button>
+      </div>
+      
     </div>
   );
 };

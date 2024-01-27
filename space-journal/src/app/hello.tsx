@@ -9,6 +9,7 @@ const WelcomePage = () => {
         setName(e.target.value);
         jumpToSection("hobby")
         console.log(name);
+        localStorage.setItem('name', e.target.value.toString());
       };
   return (
     <div className="h-screen flex row items-center ">

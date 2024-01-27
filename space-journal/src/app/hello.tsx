@@ -7,7 +7,6 @@ const WelcomePage = () => {
     const [name, setName] = useState('');
     const handleInputChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setName(e.target.value);
-        jumpToSection("hobby")
         console.log(name);
         localStorage.setItem('name', e.target.value.toString());
       };
@@ -19,6 +18,7 @@ const WelcomePage = () => {
       document.addEventListener("keydown", (event: KeyboardEvent) => {
         if (isEnterKeyPressed(event)) {
           (document.getElementById("nameInput") as HTMLInputElement).disabled = true;
+          jumpToSection("hobby")
         }
       });
 

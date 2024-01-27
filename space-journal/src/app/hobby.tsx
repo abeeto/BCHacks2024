@@ -42,8 +42,9 @@ const HobbyTracker = () => {
   };
 
   return (
-    <div style={pageStyles} className=".h-screen">
-      <p className ="align-top">Have you been...</p>
+    <div className="flex min-h-screen flex-col items-center justify-between flex .h-screen">
+      <div id="hobby" className="align-top"></div>
+      <p className ="align-top">Have you been...............................................................</p>
       <ul>
         {hobbies.map((hobby, index) => (
           <li key={index}>

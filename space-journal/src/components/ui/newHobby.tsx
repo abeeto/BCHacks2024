@@ -43,7 +43,7 @@ const HobbyForm: React.FC<HobbyFormProps> = ({ hobbies, setHobbies, setOpen, cla
     setHobbies([...hobbies, newHobby]);
     setOpen(false);
   };
-
+  document.getElementById("hobbyInput")?.focus();
   return (
     <form className={`grid items-start gap-4 ${className}`} onSubmit={addNewHobby}>
       <div className="grid gap-2">

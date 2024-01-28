@@ -8,16 +8,16 @@ const MoodGrid: React.FC = () => {
   const days = 7;
 
   // Generate an example data set with random contributions count for each day
-  const data = [0, NaN, 7, 2, -7];
+  const data = sentimentsArrayForThisYear();
 
   // Function to determine the color based on the contribution count
   const colorForCount = (count: number) => {
     if (isNaN(count)) return 'bg-slate-600'
-    if (count <= -7) return 'bg-blue-600';
-    if (count <= -4) return 'bg-blue-500';
+    if (count <= -7) return 'bg-red-600';
+    if (count <= -4) return 'bg-red-500';
     if (count === 0) return 'bg-stone-400'; // no contributions
-    if (count <= 4) return 'bg-red-400'; // 1-9 contributions
-    return 'bg-red-600'; // 30+ contributions
+    if (count <= 4) return 'bg-blue-400'; // 1-9 contributions
+    return 'bg-blue-600'; // 30+ contributions
   };
 
   return (

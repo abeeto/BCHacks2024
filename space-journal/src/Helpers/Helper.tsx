@@ -53,6 +53,12 @@ export function setJournal(journalText: string, sentiment: number){
     month: new Date().getMonth(),
     day: new Date().getDate(),
   }
+  if(journalEntry.sentiment > 20){
+    journalEntry.sentiment = 20;
+  } else if (journalEntry.sentiment < -20){
+    journalEntry.sentiment = -20;
+  }
+
   localStorage.setItem("journalEntry"+journalEntry.year + journalEntry.month + journalEntry.day ,JSON.stringify(journalEntry));
 
   let journalEntries = getJournalEntries();

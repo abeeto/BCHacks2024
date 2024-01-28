@@ -48,7 +48,7 @@ const HobbyForm: React.FC<HobbyFormProps> = ({ hobbies, setHobbies, setOpen, cla
     <form className={`grid items-start gap-4 ${className}`} onSubmit={addNewHobby}>
       <div className="grid gap-2">
         <Label htmlFor="hobbyInput">New Hobby</Label>
-        <Input type="text" id="hobbyInput" name="hobbyInput" defaultValue="" placeholder="Enter a new hobby" />
+        <Input autoComplete='off' type="text" id="hobbyInput" name="hobbyInput" defaultValue="" placeholder="Enter a new hobby" />
       </div>
       <Button type="submit">Add Hobby</Button>
     </form>

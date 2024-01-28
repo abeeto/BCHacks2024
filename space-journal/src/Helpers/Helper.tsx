@@ -77,3 +77,94 @@ export function setJournal(journalText: string, sentiment: number){
     }
   }
 }
+
+export function averageSentimentForPastYear() {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  
+  let totalSentiment = 0;
+  let numberOfEntries = 0;
+
+  // Iterate through all keys in localStorage
+  for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+
+      // Check if the key matches the journal entry format
+      if (key.startsWith('journalEntry')) {
+          // Extract the year from the key
+          const yearMatch = key.match(/(\d{4})/);
+          const entryYear = yearMatch ? parseInt(yearMatch[0], 10) : null;
+
+          // Check if the entry is from the past year
+          if (entryYear === currentYear - 1) {
+              const entry = JSON.parse(window.localStorage.getItem(key));
+
+              // Ensure the entry has sentiment property
+              if (entry && entry.sentiment !== undefined) {
+                  totalSentiment += entry.sentiment;
+                  numberOfEntries++;
+              }
+          }
+      }
+  }
+
+  // Calculate average sentiment
+  const averageSentiment = numberOfEntries > 0 ? totalSentiment / numberOfEntries : 0;
+
+  return averageSentiment;
+}
+
+export function countJournalEntriesLastYear() {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  
+  let numberOfEntries = 0;
+
+  // Iterate through all keys in localStorage
+  for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+
+      // Check if the key matches the journal entry format
+      if (key.startsWith('journalEntry')) {
+          // Extract the year from the key
+          const yearMatch = key.match(/(\d{4})/);
+          const entryYear = yearMatch ? parseInt(yearMatch[0], 10) : null;
+
+          // Check if the entry is from the past year
+          if (entryYear === currentYear - 1) {
+              numberOfEntries++;
+          }
+      }
+  }
+
+  return numberOfEntries;
+}
+
+export function sentimentsArrayForThisYear() {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  
+  const sentimentsArray = [];
+
+  // Iterate through all keys in localStorage
+  for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+
+      // Check if the key matches the journal entry format
+      if (key.startsWith('journalEntry')) {
+          // Extract the year from the key
+          const yearMatch = key.match(/(\d{4})/);
+          const entryYear = yearMatch ? parseInt(yearMatch[0], 10) : null;
+
+          // Check if the entry is from this year
+          if (entryYear === currentYear) {
+              const entry = JSON.parse(localStorage.getItem(key));
+
+              // Add sentiment to the array, or NaN if not available
+              sentimentsArray.push(entry && entry.sentiment !== undefined ? entry.sentiment : NaN);
+          }
+      }
+  }
+
+  return sentimentsArray;
+}

@@ -14,18 +14,9 @@ if (storedJournalEntries.includes(str)) {
     prevJournal = JSON.parse(getJournalAtDate(str) ?? "{}").text;
 }
 
-// for converting rgb to hex
-function componentToHex(c : number) {
-    var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
-}
-const rgbToHex = (r : number, g : number, b : number) => {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-}
-
 // Function to get border color based on data value
-const convertSentimentToColor = (value: number) => {
-    return rgbToHex(125 - (value * 10), 125 + (value * 10), 0);
+const convertSentimentToColor = (value: number, alpha?: number) => {
+    return `rgba(${125 - (value * 10)}, ${125 + (value * 10)}, 0, ${alpha ?? 1})`;
 }
 
 
@@ -42,11 +33,24 @@ function runthispls(content: string) {
     
     // change the css of the color-sentiment class based on sentiment value
     textbox.style.borderColor = convertSentimentToColor(sentimentValue);
+    //textbox.style.boxShadow = "0 0 0 3px " + convertSentimentToColor(sentimentValue, 0.2);
+    textbox.style.boxShadow = `
+    ${convertSentimentToColor(sentimentValue, 0.25)} 0px 54px 55px, 
+    ${convertSentimentToColor(sentimentValue, 0.12)} 0px -12px 30px, 
+    ${convertSentimentToColor(sentimentValue, 0.12)} 0px 4px 6px, 
+    ${convertSentimentToColor(sentimentValue, 0.17)} 0px 12px 13px, 
+    ${convertSentimentToColor(sentimentValue, 0.09)} 0px -3px 5px
+`;
     toolbar.style.borderColor = convertSentimentToColor(sentimentValue);
-    
+    //toolbar.style.boxShadow = "0 0 0 3px " +convertSentimentToColor(sentimentValue, 0.2);
+    toolbar.style.boxShadow = `
+    ${convertSentimentToColor(sentimentValue, 0.25)} 0px 54px 55px, 
+    ${convertSentimentToColor(sentimentValue, 0.12)} 0px -12px 30px, 
+    ${convertSentimentToColor(sentimentValue, 0.12)} 0px 4px 6px, 
+    ${convertSentimentToColor(sentimentValue, 0.17)} 0px 12px 13px, 
+    ${convertSentimentToColor(sentimentValue, 0.09)} 0px -3px 5px
+`;
 }
-
-
 
 export default function TextEditor() {
     const [value, setValue] = useState(prevJournal);

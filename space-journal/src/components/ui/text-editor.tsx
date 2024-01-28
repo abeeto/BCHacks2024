@@ -17,14 +17,17 @@ if(storedJournalEntries.includes(str)){
 export default function TextEditor() {
     const [value, setValue] = useState(prevJournal);
 
-    // THIS REMOVES ALL HTML TAGS
-    const adjustedValue = value.replace(/(<([^>]+)>)/ig, '');
+    if(value != null){
+        // THIS REMOVES ALL HTML TAGS
+        const adjustedValue = value.replace(/(<([^>]+)>)/ig, '');
 
-    // Get Sentiment score
-    const sentimentValue = sentiment(adjustedValue).score;
+        // Get Sentiment score
+        const sentimentValue = sentiment(adjustedValue).score;
 
-    // Set journal
-    setJournal(adjustedValue, sentimentValue);
+        // Set journal
+        setJournal(adjustedValue, sentimentValue);
+    }
+    
 
     const modules = useMemo(() => {
         return {

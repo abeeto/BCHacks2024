@@ -42,7 +42,11 @@ export function getJournalAtDate(date : string){
   // This is an example for feb2 of 2024
   const str = "journalEntry" + date;
   console.log("string: ", str);
-  return localStorage.getItem(str);
+  try {
+    return localStorage.getItem(str);
+  } catch (error) {
+    return "ERROR";
+  }
 }
 
 export function setJournal(journalText: string, sentiment: number){

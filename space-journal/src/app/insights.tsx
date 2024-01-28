@@ -10,7 +10,7 @@ const Insights = () => {
             <div id="notlast" className="section"></div>
             <h2 className="text-4xl">Your Insights</h2>
             <h3 className="text-2xl happiness-info">
-                You were <span className="text-2xl font-extrabold">happy</span> on average last year.
+                You were <span className="text-2xl text-green-500 font-extrabold">happy</span> on average last year.
                  with an average score of <span className="text-2xl font-extrabold">{formatToTwoDecimals(averageSentimentForPastYear())} </span>
                  over <span className="text-2xl font-extrabold">{formatToTwoDecimals(countJournalEntriesLastYear())}</span> entries!
                  <br></br><br></br>

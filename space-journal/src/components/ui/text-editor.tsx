@@ -4,6 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import "../../app/styles/textbox.css";
 import { getJournalAtDate, getJournalEntries, setJournal } from '../../Helpers/Helper'
 import chroma from 'chroma-js';
+
 var sentiment = require('wink-sentiment');
 
 // THIS WHOLE PART LOADS THE PREV JOURNAL
@@ -15,13 +16,21 @@ if (storedJournalEntries.includes(str)) {
     prevJournal = JSON.parse(getJournalAtDate(str) ?? "{}").text;
 }
 
+// CUSTOM COLOR STUFF
 const happyColor = localStorage.getItem('happyColor') || '#008000';
 const unhappyColor = localStorage.getItem('unhappyColor') || '#FF0000';
-const colorScale = chroma.scale([happyColor, unhappyColor]).mode('lch');
+const colorScale = chroma.scale([unhappyColor, happyColor]).mode('lch');
 
 // Function to get border color based on data value
-const convertSentimentToColor = (value: number, alpha?: number) => {
-    return `rgba(${125 - (value * 10)}, ${125 + (value * 10)}, 0, ${alpha ?? 1})`;
+const convertSentimentToColor = (sentiment: number, alpha?: number) => {
+    //return `rgba(${125 - (sentiment * 10)}, ${125 + (sentiment * 10)}, 0, ${sentiment ?? 1})`;
+    const color = colorScale(normaliseSentiment(sentiment)).rgba();
+    return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${alpha ?? 1})`;
+}
+
+//normalise the sentiment (a value between -20 and +20) to be between 0 and 1
+const normaliseSentiment = (sentiment: number) => {
+    return (sentiment + 20) / 40;
 }
 
 

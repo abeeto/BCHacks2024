@@ -2,12 +2,17 @@
 import React, { useRef, useEffect } from 'react';
 import { Chart, registerables } from 'chart.js';
 import './styles/graphs.css';
+import { getJournalAtDate, getJournalEntries} from '../Helpers/Helper'
+
 
 Chart.register(...registerables);
 
 // dummy sentiment data
-const monthSentiments = [1, 4, 6, 8, 3, 5, 2, 1, 4, 6, 8, 3, 5, 2];
+const monthSentiments = [-5, -6.5, -2, 1, -1, 4, 6, 6, 2, -1, -2, 4, 6, 7];
 const last7DaysSentiments = [1, 4, 6, 8, 3, 5, 2];
+
+// journal entries data (just do .sentiment for the sentiment values)
+const storedJournalEntries = getJournalEntries();
 
 // Function to get month name from a Date object
 const getMonthName = (date: Date) => {
@@ -37,15 +42,31 @@ const generateLast7Days = () => {
     return days;
 }
 
+const getSentimentLast7Days = () => {
+    const sentiments = [];
+    let date = new Date();
+    for (let i = 0; i < 7; i++) {
+        const str = "" + date.getFullYear() + date.getMonth() + date.getDate();
+        if(storedJournalEntries.includes(str)){
+            sentiments.unshift(JSON.parse(getJournalAtDate(str)??"{}").sentiment);
+        }
+        else{
+            sentiments.unshift(0);
+        }
+        date.setDate(date.getDate() - 1);
+    }
+    return sentiments;
+}
+
 
 // Function to get color based on data value
 const getColor = (value: number) => {
-    return `rgb(${255 - (value * 25.5)}, ${value * 25.5}, 0)`;
+    return `rgb(${125 - (value * 10)}, ${125 + (value * 10)}, 0)`;
 }
 
 // Function to get border color based on data value
 const getBorderColor = (value: number) => {
-    return `rgb(${255 - (value * 25.5)}, ${value * 25.5}, 0)`;
+    return `rgb(${125 - (value * 10)}, ${125 + (value * 10)}, 0)`;
 }
 
 const Dashboard = () => {
@@ -106,7 +127,7 @@ const Dashboard = () => {
         datasets: [
             {
                 label: 'Sentiment',
-                data: last7DaysSentiments,
+                data: getSentimentLast7Days(),
                 backgroundColor: (context: { dataset: { data: { [x: string]: number; }; }; dataIndex: string | number; }) => getColor(context.dataset.data[context.dataIndex]),
                 borderColor: (context: { dataset: { data: { [x: string]: number; }; }; dataIndex: string | number; }) => getBorderColor(context.dataset.data[context.dataIndex]),
                 borderWidth: 3,

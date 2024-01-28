@@ -102,7 +102,6 @@ export function averageSentimentForPastYear() {
               // Ensure the entry has sentiment property
               if (entry && entry.sentiment !== undefined) {
                   totalSentiment += entry.sentiment;
-                  console.log(entry.sentiment)
                   numberOfEntries++;
               }
           }

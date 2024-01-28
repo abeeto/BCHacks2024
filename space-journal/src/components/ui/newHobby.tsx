@@ -16,13 +16,13 @@ export const NewHobbyDrawer: React.FC<NewHobbyDrawerProps> = ({ hobbies, setHobb
   return (
     <Drawer open={open} onOpenChange={setOpen} >
       <DrawerTrigger asChild>
-        <Button className ='mt-5 text-xl bg-blue-400 border-secondary text-white'>Add Hobby</Button>
+        <Button className ='mt-5 text-xl bg-blue-400 border-secondary text-white'>Add Habit</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Add Hobby</DrawerTitle>
+          <DrawerTitle>Add Daily Habit</DrawerTitle>
           <DrawerDescription>
-            Thinking of a new hobby? It can be anything, but works best for daily habits.
+            Thinking of a new daily habit? It can be anything to keep you sane and happy!
           </DrawerDescription>
         </DrawerHeader>
         <HobbyForm hobbies={hobbies} setHobbies={setHobbies} setOpen={setOpen} className="px-4"/>
@@ -47,10 +47,10 @@ const HobbyForm: React.FC<HobbyFormProps> = ({ hobbies, setHobbies, setOpen, cla
   return (
     <form className={`grid items-start gap-4 ${className}`} onSubmit={addNewHobby}>
       <div className="grid gap-2">
-        <Label htmlFor="hobbyInput">New Hobby</Label>
+        <Label htmlFor="hobbyInput">New Habit</Label>
         <Input autoComplete='off' required type="text" id="hobbyInput" name="hobbyInput" defaultValue="" placeholder="Enter a new hobby" />
       </div>
-      <Button type="submit">Add Hobby</Button>
+      <Button type="submit">Add Habit</Button>
     </form>
   );
 }

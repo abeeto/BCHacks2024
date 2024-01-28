@@ -31,12 +31,18 @@ const HobbyTracker = () => {
       <div id="hobby" className="section align-top"></div>
       <div className='flex flex-col w-4/5'> 
           <div className ="text-4xl mb-5">Have you been..</div>
-            {hobbies.map((hobby, index) => (
-              <div key={index} className="flex flex-row ">
-                <HobbyText hobby={hobby} index={index} deleteHobby={deleteHobby}/>
-                <StreakCounter hobby={hobby} index={index} updateStreakCount={updateStreakCount}/>
+          {hobbies.length > 0 ? (
+              hobbies.map((hobby, index) => (
+                <div key={index} className="flex flex-row ">
+                  <HobbyText hobby={hobby} index={index} deleteHobby={deleteHobby}/>
+                  <StreakCounter hobby={hobby} index={index} updateStreakCount={updateStreakCount}/>
+                </div>
+              ))
+            ) : (
+              <div>
+                <div className='text-xl text-center border-red-800 border-2 bg-slate-900 p-5 py-10 rounded-lg'>No daily habits added yet. Add a new habit!</div>
               </div>
-            ))}
+            )} 
             <NewHobbyDrawer hobbies={hobbies} setHobbies={setHobbies}/>
         </div>
       <div></div>

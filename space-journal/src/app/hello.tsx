@@ -55,7 +55,7 @@ const WelcomePage = () => {
     <div className="h-screen flex row items-center ">
       <div className="text-4xl pr-2">Welcome,</div>
       <Input id="nameInput" autoComplete="off" className="border-0 border-b-2 border-blue-300 focus:none text-blue-300 text-4xl focus-visible:ring-0 "
-        placeholder="sexy" onChange={handleInputChange} />
+        placeholder="Enter your name!" onChange={handleInputChange} />
     </div>
 
   )

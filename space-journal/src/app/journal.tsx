@@ -17,7 +17,7 @@ const journal = () => {
     <div id="journal" className="flex min-h-screen flex-col items-center justify-between .h-screen w-4/5">
       <div id="jj" className="section align-top"></div>
       <div className="">
-        <h2 className='text-4xl pr-2'>What is on your mind?</h2>
+        <h2 className='text-4xl pr-2 mb-5'>What is on your mind?</h2>
         <TextEditor />
       </div>
       <div></div>

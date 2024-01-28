@@ -171,8 +171,7 @@ const Dashboard = () => {
                     plugins: {
                         legend: {
                             display: false, 
-                        },
-                        
+                        },             
                         animation: {
                             easing: 'linear',
                             duration: 500

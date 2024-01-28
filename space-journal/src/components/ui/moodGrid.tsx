@@ -11,11 +11,11 @@ const MoodGrid: React.FC = () => {
 
   // Function to determine the color based on the contribution count
   const colorForCount = (count: number) => {
+    if (isNaN(count)) return 'bg-slate-600'
     if (count <= -7) return 'bg-red-600';
     if (count <= -4) return 'bg-amber-500';
     if (count === 0) return 'bg-yellow-300'; // no contributions
     if (count <= 4) return 'bg-green-400'; // 1-9 contributions
-    if (count <= 7) return 'bg-green-500'; // 10-19 contributions
     return 'bg-green-600'; // 30+ contributions
   };
 
@@ -31,7 +31,7 @@ const MoodGrid: React.FC = () => {
                 <div
                   key={dayIndex}
                   className={`w-3 h-3 ${colorForCount(count)} rounded-sm`}
-                  // style={{ opacity: count === 0 ? 0.3 : 1 }}
+                  style={{ opacity: isNaN(count) ? 0.3 : 1 }}
                 />
               );
             })}
@@ -43,7 +43,7 @@ const MoodGrid: React.FC = () => {
         <div className="flex items-center">
           <span className="text-xs text-gray-400 mr-2">Negative</span>
           <div className="flex gap-1">
-            {[-7,-4,0,4,7,9].map((_, i) => (
+            {[-7,-4,0,4,7].map((_, i) => (
               <div key={i} className={`w-3 h-3 ${colorForCount(_)} rounded-sm`} />
             ))}
           </div>

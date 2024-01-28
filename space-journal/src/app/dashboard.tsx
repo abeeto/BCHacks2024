@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Chart, registerables } from 'chart.js';
 import './styles/graphs.css';
 import MoodGrid from '@/components/ui/moodGrid';
@@ -7,13 +7,10 @@ import { getJournalAtDate, getJournalEntries} from '../Helpers/Helper'
 
 
 Chart.register(...registerables);
-
 // dummy sentiment data
 let monthSentiments = [-5, -6.5, -2, 1, -1, 4, 6, 6, 2, -1, -2, 4, 6, 7];
 const last7DaysSentiments = [1, 4, 6, 8, 3, 5, 2];
 
-// journal entries data (just do .sentiment for the sentiment values)
-const storedJournalEntries = getJournalEntries();
 
 // Function to get month name from a Date object
 const getMonthName = (date: Date) => {
@@ -44,6 +41,8 @@ const generateLast7Days = () => {
 }
 
 const getSentimentLast7Days = () => {
+    // journal entries data (just do .sentiment for the sentiment values)
+    const storedJournalEntries = getJournalEntries();
     const sentiments = [];
     let date = new Date();
     for (let i = 0; i < 7; i++) {
@@ -57,14 +56,46 @@ const getSentimentLast7Days = () => {
         date.setDate(date.getDate() - 1);
     }
     return sentiments;
-}
+} 
+
+const getSentimentLast12Months = () => {
+    // journal entries data (just do .sentiment for the sentiment values)
+    const storedJournalEntries = getJournalEntries();
+    const sentiments = [];
+    let date = new Date();
+    for (let i = 0; i < 365; i++) {
+        const str = "" + date.getFullYear() + date.getMonth() + date.getDate();
+        if(storedJournalEntries.includes(str)){
+            sentiments.unshift(JSON.parse(getJournalAtDate(str)??"{}").sentiment);
+        }
+        else{
+            sentiments.unshift(0);
+        }
+        date.setDate(date.getDate() - 1);
+    }
+    var monthAverage = [];
+    for(var i = 0; i < 12; i++){
+        const chunk = sentiments.slice(i, i + 30);
+        var avg = 0;
+        for(var k = 0; k < chunk.length; k++){
+            avg += chunk[k];
+        }
+        avg = avg / 30;
+        monthAverage.push(avg);
+    }
+    console.log(monthAverage);
+    monthSentiments = monthAverage;
+    return monthAverage;
+} 
 
 function updateThisMonthData() {
+    // journal entries data (just do .sentiment for the sentiment values)
+    const storedJournalEntries = getJournalEntries();
     // just update the data for the current month
     const date = new Date();
     const str = "" + date.getFullYear() + date.getMonth() + date.getDate();
         if(storedJournalEntries.includes(str)){
-        monthSentiments[12] = monthSentiments[12] + (JSON.parse(getJournalAtDate(str) ?? "{}").sentiment / 28.0);
+        //monthSentiments[12] = monthSentiments[12] + (JSON.parse(getJournalAtDate(str) ?? "{}").sentiment / 28.0);
     }
     
 }
@@ -81,7 +112,13 @@ const getBorderColor = (value: number) => {
 }
 
 const Dashboard = () => {
-
+    var date = new Date();
+    const str = "" + date.getFullYear() + date.getMonth() + date.getDate();
+    const [senti, setSenti] = useState(getJournalAtDate(str));
+    if(getJournalAtDate(str) != senti){
+        setSenti(getJournalAtDate(str));
+    }
+    
     //
     // CHART 1 (12 months)
     //
@@ -89,7 +126,7 @@ const Dashboard = () => {
 
     const chartContainer = useRef(null);
     const chartRef = useRef<Chart<"line", number[], string> | null>(null);
-
+    getSentimentLast12Months();
     // Dummy sentiment analysis data
     const sentimentData = {
         labels: generateLast12Months(),
@@ -114,9 +151,20 @@ const Dashboard = () => {
                 type: 'line',
                 data: sentimentData,
                 options: {
+                    scales: {
+                        y: {
+                            suggestedMin: -2,
+                            suggestedMax: 2
+                        }
+                    },
                     plugins: {
                         legend: {
                             display: false, 
+                        },
+                        
+                        animation: {
+                            easing: 'linear',
+                            duration: 500
                         }
                     }
                 }
@@ -124,7 +172,7 @@ const Dashboard = () => {
 
             chartRef.current = newChartInstance;
         }
-    }, [chartContainer]);
+    }, [senti]);
 
     // 
     // CHART 2 (7 days)
@@ -146,6 +194,7 @@ const Dashboard = () => {
             }
         ],
     };
+    
     useEffect(() => {
         if (chartContainer2 && chartContainer2.current) {
             if (chartRef2.current) {
@@ -161,15 +210,22 @@ const Dashboard = () => {
                         },
                         
                     },
+                    scales: {
+                        y: {
+                            suggestedMin: -10,
+                            suggestedMax: 10
+                        }
+                    },
                     animation: {
-                        duration:0
+                        easing: 'linear',
+                        duration: 500
                     }
                 }
             });
 
             chartRef2.current = newChartInstance2;
         }
-    }, [sentimentData2]);
+    }, [senti]);
     return (
         <div className="flex min-h-screen flex-col items-center justify-between .h-screen w-4/5">
             <div id="d" className="section align-top"></div>

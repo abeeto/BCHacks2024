@@ -11,6 +11,7 @@ import WelcomePage from "./hello"
 import HobbyPage from "./hobby"
 import JournalPage from "./journal"
 import Dashboard from "./dashboard";
+import Insights from "./insights"
 import Nav from "./nav"
 import MoodGrid from "@/components/ui/moodGrid";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -26,10 +27,9 @@ export default function Home() {
 
     // Get all section elements
     const sections = Array.from(document.querySelectorAll('.section'))
-      .filter(section => section.offsetTop >= (scrollPosition+100))
+      .filter(section => section.offsetTop >= (scrollPosition + 100))
       .sort((a, b) => a.offsetTop - b.offsetTop);
-    console.log(sections[0].id)
-    setNextSection(sections[0].id)
+    if(sections.length > 0) setNextSection(sections[0].id)
   };
 
   // Add and remove the scroll event listener when the component mounts/unmounts
@@ -44,11 +44,16 @@ export default function Home() {
     //flex min-h-screen flex-col items-center justify-between pb-24
     <main className="flex-col w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
       {nextSection !== "last" ? <ScrollDownButton targetId={nextSection} /> : <div></div>}
-      <Image src={Rocket} width="100" height="100" alt="Description" className = "fixed bottom-0 right-0 shake" />
+      <div className="fixed bottom-0 right-0 shake">
+  <div>
+    <Image src={Rocket} width={100} height={100} alt="Description" />
+  </div>
+</div>
       <WelcomePage />
       <HobbyPage />
       <JournalPage />
       <Dashboard />
+      <Insights/>
       <ColorChanger />
       <Nav/>
       <div className="bg-animation">

@@ -4,7 +4,11 @@ import { NewHobbyDrawer } from '@/components/ui/newHobby';
 import StreakCounter from '@/components/ui/streakCounter';
 import {getHobbies} from '../Helpers/Helper'
 const HobbyTracker = () => {
-  const [hobbies, setHobbies] = useState(getHobbies());
+  const [hobbies, setHobbies] = useState([
+    { name: 'working out', count: 9 },
+    { name: 'eating healthy', count: 0 },
+    { name: 'reading books', count: 999 },
+  ]);
   const updateStreakCount = (index: number, toAdd: boolean) => {
     
     const newHobbies = hobbies.map((hobby, i) => 

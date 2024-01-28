@@ -1,36 +1,34 @@
-import { Hobby } from "@/app/types/Hobby"
-import React, { useState } from "react"
+import React, { useState } from "react";
 import clsx from 'clsx';
+import { Hobby } from "@/app/types/Hobby";
 
 type StreakCounterProps = {
-    hobby: Hobby,
-    index: number,
+    hobby: Hobby;
+    index: number;
     updateStreakCount: (index: number, toAdd: boolean) => void;
-}
+};
 
-const StreakCounter: React.FC<StreakCounterProps> = ({hobby, index, updateStreakCount}) => {
-    const [toAdd, setToAdd] = React.useState(false);
+const StreakCounter: React.FC<StreakCounterProps> = ({ hobby, index, updateStreakCount }) => {
+    const [toAdd, setToAdd] = useState(false);
 
     const handleClick = () => {
-        const newToAdd = !toAdd
-        setToAdd(newToAdd)
-        console.log(toAdd)
+        const newToAdd = !toAdd;
+        setToAdd(newToAdd);
         updateStreakCount(index, newToAdd);
-    }
-    return (
-        <div 
-            className={clsx(
-                'text-xl ml-4 mt-3 pl-4 pr-4 pt-2 pb-2 rounded-sm flex-shrink', // Common classes
-                {
-                    'bg-secondary': !toAdd, // Class when toAdd is false
-                    'bg-primary': toAdd // Class when toAdd is true
-                }
-            )}
-            onClick={handleClick}
-        >
-            🔥 x{hobby.count}
-        </div>
-    )
-}
+    };
+
+    return (  
+        <div className= {clsx(
+            'text-xl ml-4 mt-3 p-2 rounded-sm flex flex-col items-center justify-center w-12', // Added flexbox classes for centering
+            {
+                'bg-secondary': !toAdd, // Class when toAdd is false
+                'bg-primary': toAdd // Class when toAdd is true
+            }
+        )} onClick={handleClick}>
+            <div>{hobby.count > 0 ? "🔥" : "🥶"}</div>
+            <div className="text-sm text-center"> {hobby.count}</div>
+        </div>     
+    );
+};
 
 export default StreakCounter;

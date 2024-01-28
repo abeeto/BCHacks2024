@@ -254,7 +254,6 @@ const Dashboard = () => {
                 </div>
                 <MoodGrid/>
             </div>
-            <div className="section" id="last"></div>
         </div>
     );
 };

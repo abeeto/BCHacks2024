@@ -121,9 +121,8 @@ const Dashboard = () => {
 
     const chartContainer2 = useRef(null);
     const chartRef2 = useRef<Chart<"line", number[], string> | null>(null);
-
     // Dummy sentiment analysis data
-    const sentimentData2 = {
+    var sentimentData2 = {
         labels: generateLast7Days(),
         datasets: [
             {
@@ -136,7 +135,6 @@ const Dashboard = () => {
             }
         ],
     };
-
     useEffect(() => {
         if (chartContainer2 && chartContainer2.current) {
             if (chartRef2.current) {
@@ -149,15 +147,18 @@ const Dashboard = () => {
                     plugins: {
                         legend: {
                             display: false,
-                        }
+                        },
+                        
+                    },
+                    animation: {
+                        duration:0
                     }
                 }
             });
 
             chartRef2.current = newChartInstance2;
         }
-    }, [chartContainer2]);
-
+    }, [sentimentData2]);
     return (
         <div className="flex min-h-screen flex-col items-center justify-between .h-screen w-4/5">
             <div id="d" className="section align-top"></div>

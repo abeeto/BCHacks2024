@@ -9,7 +9,7 @@ import { getJournalAtDate, getJournalEntries} from '../Helpers/Helper'
 Chart.register(...registerables);
 
 // dummy sentiment data
-const monthSentiments = [-5, -6.5, -2, 1, -1, 4, 6, 6, 2, -1, -2, 4, 6, 7];
+let monthSentiments = [-5, -6.5, -2, 1, -1, 4, 6, 6, 2, -1, -2, 4, 6, 7];
 const last7DaysSentiments = [1, 4, 6, 8, 3, 5, 2];
 
 // journal entries data (just do .sentiment for the sentiment values)
@@ -26,7 +26,7 @@ const getMonthName = (date: Date) => {
 const generateLast12Months = () => {
     const months = [];
     let date = new Date();
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 13; i++) {
         months.unshift(getMonthName(date));
         date.setMonth(date.getMonth() - 1);
     }
@@ -59,6 +59,16 @@ const getSentimentLast7Days = () => {
     return sentiments;
 }
 
+function updateThisMonthData() {
+    // just update the data for the current month
+    const date = new Date();
+    const str = "" + date.getFullYear() + date.getMonth() + date.getDate();
+        if(storedJournalEntries.includes(str)){
+        monthSentiments[12] = monthSentiments[12] + (JSON.parse(getJournalAtDate(str) ?? "{}").sentiment / 28.0);
+    }
+    
+}
+
 
 // Function to get color based on data value
 const getColor = (value: number) => {
@@ -75,6 +85,7 @@ const Dashboard = () => {
     //
     // CHART 1 (12 months)
     //
+    updateThisMonthData();
 
     const chartContainer = useRef(null);
     const chartRef = useRef<Chart<"line", number[], string> | null>(null);

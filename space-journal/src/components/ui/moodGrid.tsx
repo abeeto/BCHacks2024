@@ -1,4 +1,5 @@
 import React from 'react';
+import {sentimentsArrayForThisYear} from '../../Helpers/Helper'
 
 // Example component to render a "contributions" grid
 const MoodGrid: React.FC = () => {

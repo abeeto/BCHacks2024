@@ -2,6 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Chart, registerables } from 'chart.js';
 import './styles/graphs.css';
+import MoodGrid from '@/components/ui/moodGrid';
 import { getJournalAtDate, getJournalEntries} from '../Helpers/Helper'
 
 
@@ -171,6 +172,7 @@ const Dashboard = () => {
                         <canvas id='chart1' className='' ref={chartContainer} />
                     </div>
                 </div>
+                <MoodGrid/>
             </div>
         </div>
     );

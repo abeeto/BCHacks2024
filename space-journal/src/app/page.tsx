@@ -9,8 +9,7 @@ import WelcomePage from "./hello"
 import HobbyPage from "./hobby"
 import JournalPage from "./journal"
 import Dashboard from "./dashboard";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { CardDemo } from "@/components/ui/card-demo";
+import MoodGrid from "@/components/ui/moodGrid";
 export default function Home() {
   return (
     //flex min-h-screen flex-col items-center justify-between pb-24
@@ -25,6 +24,7 @@ export default function Home() {
         <div id="stars3"></div>
         <div id="stars4"></div>
     </div>
+
     </main>
   );
 }

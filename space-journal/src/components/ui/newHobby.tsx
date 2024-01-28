@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label"
 import { Hobby } from "@/app/types/Hobby"
 import { NewHobbyDrawerProps } from "@/app/types/NewHobbyProps"
 import { HobbyFormProps } from "@/app/types/HobbyFormProps"
-import { addHobby } from "../../Helpers/Helper"
 
 
 
@@ -14,7 +13,7 @@ export const NewHobbyDrawer: React.FC<NewHobbyDrawerProps> = ({ hobbies, setHobb
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <Drawer open={open} onOpenChange={setOpen} >
+    <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button className ='mt-5 text-xl bg-blue-400 border-secondary text-white'>Add Habit</Button>
       </DrawerTrigger>
@@ -48,7 +47,7 @@ const HobbyForm: React.FC<HobbyFormProps> = ({ hobbies, setHobbies, setOpen, cla
     <form className={`grid items-start gap-4 ${className}`} onSubmit={addNewHobby}>
       <div className="grid gap-2">
         <Label htmlFor="hobbyInput">New Habit</Label>
-        <Input autoComplete='off' required type="text" id="hobbyInput" name="hobbyInput" defaultValue="" placeholder="Enter a new hobby" />
+        <Input autoComplete='off' required type="text" id="hobbyInput" name="hobbyInput" defaultValue="" placeholder="Enter a new habbit" />
       </div>
       <Button type="submit">Add Habit</Button>
     </form>

@@ -219,7 +219,7 @@
         }
 
 #journal{
-    z-index: 999;
+    z-index: 700;
 }
 
 @keyframes shake {

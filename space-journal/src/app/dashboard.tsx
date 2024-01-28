@@ -253,6 +253,7 @@ const Dashboard = () => {
                 </div>
                 <MoodGrid/>
             </div>
+            <div></div>
         </div>
     );
 };

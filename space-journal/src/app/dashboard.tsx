@@ -2,7 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Chart, registerables } from 'chart.js';
 import './styles/graphs.css';
-
+import MoodGrid from '@/components/ui/moodGrid';
 Chart.register(...registerables);
 
 // dummy sentiment data
@@ -150,6 +150,7 @@ const Dashboard = () => {
                         <canvas id='chart1' className='' ref={chartContainer} />
                     </div>
                 </div>
+                <MoodGrid/>
             </div>
         </div>
     );

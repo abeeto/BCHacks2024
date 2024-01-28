@@ -75,7 +75,7 @@ const getSentimentLast12Months = () => {
     }
     var monthAverage = [];
     for(var i = 0; i < 12; i++){
-        const chunk = sentiments.slice(i, i + 30);
+        const chunk = sentiments.slice(i * 30, (i * 30) + 30);
         var avg = 0;
         for(var k = 0; k < chunk.length; k++){
             avg += chunk[k];

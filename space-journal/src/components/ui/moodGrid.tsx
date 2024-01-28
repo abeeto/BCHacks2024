@@ -1,4 +1,5 @@
 import React from 'react';
+import {sentimentsArrayForThisYear} from '../../Helpers/Helper'
 
 // Example component to render a "contributions" grid
 const MoodGrid: React.FC = () => {
@@ -7,7 +8,7 @@ const MoodGrid: React.FC = () => {
   const days = 7;
 
   // Generate an example data set with random contributions count for each day
-  const data = Array.from({ length: weeks * days }, () => Math.floor(Math.random() * 21) - 10);
+  const data = sentimentsArrayForThisYear();
 
   // Function to determine the color based on the contribution count
   const colorForCount = (count: number) => {

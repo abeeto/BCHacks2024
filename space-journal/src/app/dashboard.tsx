@@ -83,7 +83,7 @@ const getSentimentLast12Months = () => {
         avg = avg / 30;
         monthAverage.push(avg);
     }
-    console.log(monthAverage);
+    //console.log(monthAverage);
     monthSentiments = monthAverage;
     return monthAverage;
 } 

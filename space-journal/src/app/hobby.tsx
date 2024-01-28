@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { NewHobbyDrawer } from '@/components/ui/newHobby';
 import StreakCounter from '@/components/ui/streakCounter';
-import {getHobbies, addHobby, saveHobbies} from '../Helpers/Helper'
+import {getHobbies, saveHobbies} from '../Helpers/Helper'
 const HobbyTracker = () => {
   const [hobbies, setHobbies] = useState(getHobbies());
   const updateStreakCount = (index: number, toAdd: boolean) => {
@@ -14,7 +14,7 @@ const HobbyTracker = () => {
     setHobbies(newHobbies);
   };
 
-  
+
   saveHobbies(hobbies)
  
 

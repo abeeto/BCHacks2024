@@ -16,11 +16,11 @@ export function initLocalstorage(){
   localStorage.setItem('hobbies', JSON.stringify(hobbies));
 }
 
-export function getHobbies(){
-  console.log("getting")
-  return JSON.parse(localStorage.getItem('hobbies') ?? "[]");
+export function getHobbies(): Hobby[] {
+  const storedHobbies = localStorage.getItem('hobbies') ?? "[]";
+  return JSON.parse(storedHobbies);
 }
 
-export function saveHobbies(hobbies: Hobby){
+export function saveHobbies(hobbies: Hobby[]){
   localStorage.setItem('hobbies', JSON.stringify(hobbies));
 }

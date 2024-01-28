@@ -5,12 +5,15 @@ import { jumpToSection } from "@/Helpers/Helper";
 import { initLocalstorage } from '../Helpers/Helper'
 import './globals.css';
 import 'animate.css';
+
+
 const WelcomePage = () => {
   const [name, setName] = useState('');
   useEffect(() => {
     const storedName = localStorage.getItem('name');
     if (storedName == undefined) {
       initLocalstorage();
+      window.setTimeout(() => document.getElementById('nameInput')?.focus(), 0);
     } else if (storedName.length > 0 && storedName != name) {
       console.log("NAME ALREADY EXISTS IN LOCALSTORAFE")
       setName(storedName);

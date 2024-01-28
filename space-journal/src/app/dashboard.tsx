@@ -2,6 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Chart, registerables } from 'chart.js';
 import './styles/graphs.css';
+import MoodGrid from '@/components/ui/moodGrid';
 import { getJournalAtDate, getJournalEntries} from '../Helpers/Helper'
 
 
@@ -159,6 +160,7 @@ const Dashboard = () => {
 
     return (
         <div className="flex min-h-screen flex-col items-center justify-between .h-screen w-4/5">
+            <div id="d" className="section align-top"></div>
             <div id="dashboard">
                 <h2 className='text-4xl'>Your Moods</h2>
                 <div id='graph-holder' className="align-top flex content-center w-[80vw]">
@@ -171,6 +173,7 @@ const Dashboard = () => {
                         <canvas id='chart1' className='' ref={chartContainer} />
                     </div>
                 </div>
+                <MoodGrid/>
             </div>
         </div>
     );

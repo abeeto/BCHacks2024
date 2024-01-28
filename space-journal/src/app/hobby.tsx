@@ -27,8 +27,8 @@ const HobbyTracker = () => {
  
 
   return (
-    <div className="flex min-h-screen w-1/2 z-50 flex-col items-center justify-between flex">
-      <div id="hobby" className="align-top"></div>
+    <div className="flex min-h-screen w-1/2 z-50 flex-col items-center justify-between">
+      <div id="hobby" className="section align-top"></div>
       <div className='flex flex-col w-4/5'> 
           <div className ="text-4xl mb-5">Have you been..</div>
             {hobbies.map((hobby, index) => (

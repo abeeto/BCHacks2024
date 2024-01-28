@@ -7,7 +7,9 @@ Chart.register(...registerables);
 
 // Function to get month name from a Date object
 const getMonthName = (date: Date) => {
-    return date.toLocaleString('default', { month: 'short' });
+    const year = date.getFullYear().toString().substr(-2); // get last two digits of year
+    const month = date.toLocaleString('default', { month: 'short' });
+    return `${month} '${year}`;
 }
 
 // Generate an array of month labels for the past year
@@ -35,6 +37,7 @@ const Dashboard = () => {
     const chartContainer = useRef(null);
     const chartRef = useRef<Chart<"line", number[], string> | null>(null);
 
+    
     // Dummy sentiment analysis data
     const sentimentData = {
         labels: generateLast12Months(),
@@ -44,7 +47,7 @@ const Dashboard = () => {
                 data: [1, 4, 6, 8, 3, 5, 2, 1, 4, 6, 8, 3, 5, 2],
                 backgroundColor: (context: { dataset: { data: { [x: string]: number; }; }; dataIndex: string | number; }) => getColor(context.dataset.data[context.dataIndex]),
                 borderColor: (context: { dataset: { data: { [x: string]: number; }; }; dataIndex: string | number; }) => getBorderColor(context.dataset.data[context.dataIndex]),
-                borderWidth: 1,
+                borderWidth: 3,
             }
         ],
     };
@@ -57,15 +60,6 @@ const Dashboard = () => {
             const newChartInstance = new Chart<"line", number[], string>(chartContainer.current, {
                 type: 'line',
                 data: sentimentData,
-                options: {
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: 'rgb(200,200,200)',
-                            }
-                        }
-                    }
-                }
             });
     
             chartRef.current = newChartInstance;

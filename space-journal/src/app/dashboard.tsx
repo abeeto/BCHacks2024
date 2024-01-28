@@ -1,6 +1,7 @@
 'use client';
 import React, { useRef, useEffect } from 'react';
 import { Chart, registerables } from 'chart.js';
+import './styles/graphs.css';
 
 Chart.register(...registerables);
 
@@ -56,6 +57,15 @@ const Dashboard = () => {
             const newChartInstance = new Chart<"line", number[], string>(chartContainer.current, {
                 type: 'line',
                 data: sentimentData,
+                options: {
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgb(200,200,200)',
+                            }
+                        }
+                    }
+                }
             });
     
             chartRef.current = newChartInstance;
@@ -66,7 +76,7 @@ const Dashboard = () => {
         <div className="flex min-h-screen flex-col items-center justify-between .h-screen w-4/5">
             <div id="dashboard" className="align-top w-[80vw]">
                 <h2 className='text-4xl pr-2'>Your Moods</h2>
-                <canvas ref={chartContainer} />
+                <canvas id='chart1' className='' ref={chartContainer} />
             </div>
         </div>
     );

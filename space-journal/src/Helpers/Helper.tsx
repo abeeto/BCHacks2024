@@ -168,3 +168,34 @@ export function sentimentsArrayForThisYear() {
 
   return sentimentsArray;
 }
+
+export function countSentimentsForThisYear() {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  
+  let sentimentsCount = 0;
+
+  // Iterate through all keys in localStorage
+  for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+
+      // Check if the key matches the journal entry format
+      if (key.startsWith('journalEntry')) {
+          // Extract the year from the key
+          const yearMatch = key.match(/(\d{4})/);
+          const entryYear = yearMatch ? parseInt(yearMatch[0], 10) : null;
+
+          // Check if the entry is from this year
+          if (entryYear === currentYear) {
+              const entry = JSON.parse(localStorage.getItem(key));
+
+              // Check if sentiment is available in the entry
+              if (entry && entry.sentiment !== undefined) {
+                  sentimentsCount++;
+              }
+          }
+      }
+  }
+
+  return sentimentsCount;
+}

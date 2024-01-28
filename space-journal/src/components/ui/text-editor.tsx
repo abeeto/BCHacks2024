@@ -3,6 +3,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../../app/styles/textbox.css";
 import { getJournalAtDate, getJournalEntries, setJournal } from '../../Helpers/Helper'
+import chroma from 'chroma-js';
 var sentiment = require('wink-sentiment');
 
 // THIS WHOLE PART LOADS THE PREV JOURNAL
@@ -13,6 +14,10 @@ const str = "" + date.getFullYear() + date.getMonth() + date.getDate();
 if (storedJournalEntries.includes(str)) {
     prevJournal = JSON.parse(getJournalAtDate(str) ?? "{}").text;
 }
+
+const happyColor = localStorage.getItem('happyColor') || '#008000';
+const unhappyColor = localStorage.getItem('unhappyColor') || '#FF0000';
+const colorScale = chroma.scale([happyColor, unhappyColor]).mode('lch');
 
 // Function to get border color based on data value
 const convertSentimentToColor = (value: number, alpha?: number) => {

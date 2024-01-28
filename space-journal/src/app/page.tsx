@@ -12,7 +12,7 @@ import HobbyPage from "./hobby"
 import JournalPage from "./journal"
 import Dashboard from "./dashboard";
 import Insights from "./insights"
-import Nav from "./nav"
+import OldJournals from "./old-journals"
 import MoodGrid from "@/components/ui/moodGrid";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import ScrollDownButton from "@/components/ui/ScrollDownButton";
@@ -68,7 +68,7 @@ export default function Home() {
       <Dashboard />
       <Insights />
       <ColorChanger />
-      <Nav />
+      <OldJournals/>
       <div className="bg-animation">
         <div id="stars"></div>
         <div id="stars2"></div>

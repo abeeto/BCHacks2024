@@ -1,5 +1,6 @@
 import { Hobby } from '../app/types/Hobby';
-const regression = require('regression');
+import regression from 'regression';
+
 export function jumpToSection(sectionId: string) {
     var element = document.getElementById(sectionId);
     if (element) {

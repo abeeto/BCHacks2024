@@ -61,7 +61,7 @@ const MoodGrid: React.FC = () => {
           <span className="text-xs text-gray-400 mr-2">Negative</span>
           <div className="flex gap-1">
             {[-7, -4, 0, 4, 7].map((_, i) => (
-              <div key={i} className={`w-3 h-3 ${colorForCount(_)} rounded-sm`} />
+              <div key={i} className={`w-3 h-3 rounded-sm`} style={{ backgroundColor: colorForCount(_)}}/>
             ))}
           </div>
           <span className="text-xs text-gray-400 ml-2">Positive</span>

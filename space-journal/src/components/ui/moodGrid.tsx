@@ -8,7 +8,7 @@ const MoodGrid: React.FC = () => {
   const days = 7;
 
   // Generate an example data set with random contributions count for each day
-  const data = [0, NaN, 7, 2, -7];
+  const data = sentimentsArrayForThisYear();
 
   // Function to determine the color based on the contribution count
   const colorForCount = (count: number) => {

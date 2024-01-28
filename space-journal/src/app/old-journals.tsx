@@ -60,30 +60,35 @@ export default function OldJournals() {
     }
 
     return (
-            <div className="flex flex-col bg-slate-800 p-10 gap-5 rounded-m w-full items-left justify-center">
+            <div className="flex flex-col z-50 opacity-85 bg-slate-800 p-10 gap-5 rounded-lg w-full items-left justify-center">
             <h2 className='text-xl'>View Previous Journals</h2>
-            <Popover>
-                <PopoverTrigger asChild>
-                    <Button
-                        variant={"outline"}
-                        className={cn(
-                            "w-[240px] justify-start text-left font-normal",
-                            !date && "text-muted-foreground"
-                        )}
-                    >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {date ? format(date, "PPP") : <span>Pick a date</span>}
-                    </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                        mode="single"
-                        selected={date}
-                        onSelect={setDate}
-                        initialFocus
-                    />
-                </PopoverContent>
-            </Popover>
+            <div className="flex flex-row h-10 justify-between">
+                <Popover>
+                    <PopoverTrigger asChild>
+                        <Button
+                            variant={"outline"}
+                            className={cn(
+                                "w-[240px] justify-start text-left font-normal",
+                                !date && "text-muted-foreground"
+                            )}
+                        >
+                            <CalendarIcon className="mr-2 h-4 w-4" />
+                            {date ? format(date, "PPP") : <span>Pick a date</span>}
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                            mode="single"
+                            selected={date}
+                            onSelect={setDate}
+                            initialFocus
+                        />
+                    </PopoverContent>
+                </Popover>
+                <Card className="flex">
+                    <CardContent className='p-0 px-2 pt-2 pb-0 w-40 text-s align-center'>{sentiment ? sentiment: "Sentiment Score"}</CardContent>
+                </Card>
+            </div> 
             <Card>
                 <CardHeader>
                     <CardTitle>

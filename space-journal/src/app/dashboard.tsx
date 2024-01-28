@@ -58,6 +58,36 @@ const getSentimentLast7Days = () => {
     return sentiments;
 } 
 
+const getSentimentLast12Months = () => {
+    // journal entries data (just do .sentiment for the sentiment values)
+    const storedJournalEntries = getJournalEntries();
+    const sentiments = [];
+    let date = new Date();
+    for (let i = 0; i < 365; i++) {
+        const str = "" + date.getFullYear() + date.getMonth() + date.getDate();
+        if(storedJournalEntries.includes(str)){
+            sentiments.unshift(JSON.parse(getJournalAtDate(str)??"{}").sentiment);
+        }
+        else{
+            sentiments.unshift(0);
+        }
+        date.setDate(date.getDate() - 1);
+    }
+    var monthAverage = [];
+    for(var i = 0; i < 12; i++){
+        const chunk = sentiments.slice(i, i + 30);
+        var avg = 0;
+        for(var k = 0; k < chunk.length; k++){
+            avg += chunk[k];
+        }
+        avg = avg / 30;
+        monthAverage.push(avg);
+    }
+    console.log(monthAverage);
+    monthSentiments = monthAverage;
+    return monthAverage;
+} 
+
 function updateThisMonthData() {
     // journal entries data (just do .sentiment for the sentiment values)
     const storedJournalEntries = getJournalEntries();
@@ -65,7 +95,7 @@ function updateThisMonthData() {
     const date = new Date();
     const str = "" + date.getFullYear() + date.getMonth() + date.getDate();
         if(storedJournalEntries.includes(str)){
-        monthSentiments[12] = monthSentiments[12] + (JSON.parse(getJournalAtDate(str) ?? "{}").sentiment / 28.0);
+        //monthSentiments[12] = monthSentiments[12] + (JSON.parse(getJournalAtDate(str) ?? "{}").sentiment / 28.0);
     }
     
 }
@@ -82,7 +112,13 @@ const getBorderColor = (value: number) => {
 }
 
 const Dashboard = () => {
-
+    var date = new Date();
+    const str = "" + date.getFullYear() + date.getMonth() + date.getDate();
+    const [senti, setSenti] = useState(getJournalAtDate(str));
+    if(getJournalAtDate(str) != senti){
+        setSenti(getJournalAtDate(str));
+    }
+    
     //
     // CHART 1 (12 months)
     //
@@ -90,7 +126,7 @@ const Dashboard = () => {
 
     const chartContainer = useRef(null);
     const chartRef = useRef<Chart<"line", number[], string> | null>(null);
-
+    getSentimentLast12Months();
     // Dummy sentiment analysis data
     const sentimentData = {
         labels: generateLast12Months(),
@@ -115,9 +151,20 @@ const Dashboard = () => {
                 type: 'line',
                 data: sentimentData,
                 options: {
+                    scales: {
+                        y: {
+                            suggestedMin: -2,
+                            suggestedMax: 2
+                        }
+                    },
                     plugins: {
                         legend: {
                             display: false, 
+                        },
+                        
+                        animation: {
+                            easing: 'linear',
+                            duration: 500
                         }
                     }
                 }
@@ -125,7 +172,7 @@ const Dashboard = () => {
 
             chartRef.current = newChartInstance;
         }
-    }, [chartContainer]);
+    }, [senti]);
 
     // 
     // CHART 2 (7 days)
@@ -147,12 +194,7 @@ const Dashboard = () => {
             }
         ],
     };
-    var date = new Date();
-    const str = "" + date.getFullYear() + date.getMonth() + date.getDate();
-    const [senti, setSenti] = useState(getJournalAtDate(str));
-    if(getJournalAtDate(str) != senti){
-        setSenti(getJournalAtDate(str));
-    }
+    
     useEffect(() => {
         if (chartContainer2 && chartContainer2.current) {
             if (chartRef2.current) {
@@ -167,6 +209,12 @@ const Dashboard = () => {
                             display: false,
                         },
                         
+                    },
+                    scales: {
+                        y: {
+                            suggestedMin: -10,
+                            suggestedMax: 10
+                        }
                     },
                     animation: {
                         easing: 'linear',

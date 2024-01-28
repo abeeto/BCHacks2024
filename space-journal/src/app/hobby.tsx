@@ -1,21 +1,23 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NewHobbyDrawer } from '@/components/ui/newHobby';
 import StreakCounter from '@/components/ui/streakCounter';
+import {getHobbies, saveHobbies} from '../Helpers/Helper'
 const HobbyTracker = () => {
-  const [hobbies, setHobbies] = useState([
-    { name: 'working out', count: 9 },
-    { name: 'eating healthy', count: 0 },
-    { name: 'reading books', count: 0 },
-  ]);
+  const [hobbies, setHobbies] = useState(getHobbies());
   const updateStreakCount = (index: number, toAdd: boolean) => {
+    
     const newHobbies = hobbies.map((hobby, i) => 
       toAdd ? (i === index ? { ...hobby, count: hobby.count + 1 } : hobby):
               (i === index ? { ...hobby, count: Math.max(hobby.count -1, 0)} : hobby)
     );
     setHobbies(newHobbies);
   };
+
+
+  saveHobbies(hobbies)
  
+
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-between flex">
       <div id="hobby" className="align-top"></div>

@@ -1,4 +1,5 @@
 import { Hobby } from '../app/types/Hobby';
+const regression = require('regression');
 export function jumpToSection(sectionId: string) {
     var element = document.getElementById(sectionId);
     if (element) {
@@ -131,7 +132,7 @@ export function countJournalEntriesLastYear() {
           const entryYear = yearMatch ? parseInt(yearMatch[0], 10) : null;
 
           // Check if the entry is from the past year
-          if (entryYear === currentYear - 1) {
+          if (entryYear === currentYear-1) {
               numberOfEntries++;
           }
       }
@@ -199,3 +200,42 @@ export function countSentimentsForThisYear() {
 
   return sentimentsCount;
 }
+
+
+export function calculateRegressionForLast30Days() {
+    const currentDate = new Date();
+    const thirtyDaysAgo = new Date(currentDate);
+    thirtyDaysAgo.setDate(currentDate.getDate() - 30);
+
+    const sentimentsData = [];
+
+    // Iterate through all keys in localStorage
+    Object.keys(localStorage).forEach((key) => {
+        // Check if the key matches the journal entry format
+        if (key.startsWith('journalEntry')) {
+            const entry = JSON.parse(localStorage.getItem(key));
+
+            // Check if sentiment is available in the entry
+            if (entry && entry.sentiment !== undefined) {
+                // Check if the entry is from the last 30 days
+                const entryDate = new Date(entry.year, entry.month, entry.day); // Months are zero-base
+                if (entryDate >= thirtyDaysAgo && entryDate <= currentDate) {
+                    const daysDifference = Math.floor((currentDate - entryDate) / (24 * 60 * 60 * 1000));
+                    sentimentsData.push([daysDifference, entry.sentiment]);
+                } else {
+                }
+            }
+        }
+    });
+
+    // Perform linear regression
+    const result = regression.linear(sentimentsData);
+
+    // Predict sentiment for the next month (31 days from now)
+    const daysFromNow = 31;
+    const predictedSentiment = result.equation[0] * (30 + daysFromNow) + result.equation[1];
+
+    return { regressionResult: result, predictedSentiment };
+}
+
+

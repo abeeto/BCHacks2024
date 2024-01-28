@@ -175,3 +175,7 @@ of the default styles for the quill editor (specifically the "snow" styles). */
     border-radius: 0 0 12px 12px;
     border-color: lightgray;
 }
+
+#journal .ql-snow .ql-picker-options {
+    z-index: 1000;
+}

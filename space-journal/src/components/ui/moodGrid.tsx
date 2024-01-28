@@ -13,11 +13,11 @@ const MoodGrid: React.FC = () => {
   // Function to determine the color based on the contribution count
   const colorForCount = (count: number) => {
     if (isNaN(count)) return 'bg-slate-600'
-    if (count <= -7) return 'bg-blue-600';
-    if (count <= -4) return 'bg-blue-500';
+    if (count <= -7) return 'bg-red-600';
+    if (count <= -4) return 'bg-red-500';
     if (count === 0) return 'bg-stone-400'; // no contributions
-    if (count <= 4) return 'bg-red-400'; // 1-9 contributions
-    return 'bg-red-600'; // 30+ contributions
+    if (count <= 4) return 'bg-blue-400'; // 1-9 contributions
+    return 'bg-blue-600'; // 30+ contributions
   };
 
   return (

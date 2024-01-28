@@ -52,6 +52,9 @@
   }
 }
 
+.app-background{
+    background-color: #0F172A;
+}
 /* src/components/WelcomePage.css */
 
         .full-wh {

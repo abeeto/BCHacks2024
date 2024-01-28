@@ -1,5 +1,8 @@
 import React from 'react';
 import { averageSentimentForPastYear, countJournalEntriesLastYear, calculateRegressionForLast30Days, formatToTwoDecimals} from '../Helpers/Helper'
+import ColorChanger from './color-changer';
+import OldJournals from './old-journals';
+
 const Insights = () => {
     const { regressionResult, predictedSentiment } = calculateRegressionForLast30Days();
     return (
@@ -13,6 +16,8 @@ const Insights = () => {
                  <br></br><br></br>
                  Our models predict a happiness value of <span className="text-2xl font-extrabold">{predictedSentiment}</span> next month. {regressionResult > 0 ? "Looks good!" : "Take it easy!"}
             </h3>
+            {/* <ColorChanger /> */}
+            <OldJournals/>
             <div id="newlast" className="section"></div>
         </div>
 

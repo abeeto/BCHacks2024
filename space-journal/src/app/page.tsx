@@ -1,22 +1,13 @@
 'use client'
 import Image from "next/image";
 import React, { useState, useEffect } from 'react';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
 import WelcomePage from "./hello"
 import HobbyPage from "./hobby"
 import JournalPage from "./journal"
 import Dashboard from "./dashboard";
 import Insights from "./insights"
 import OldJournals from "./old-journals"
-import MoodGrid from "@/components/ui/moodGrid";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import ScrollDownButton from "@/components/ui/ScrollDownButton";
-import { CardDemo } from "@/components/ui/card-demo";
 import Rocket from "@/../public/rocket.png"
 import ColorChanger from "./color-changer";
 export default function Home() {
@@ -67,8 +58,8 @@ export default function Home() {
       <JournalPage />
       <Dashboard />
       <Insights />
-      <ColorChanger />
-      <OldJournals/>
+      {/* <ColorChanger />
+      <OldJournals/> */}
       <div className="bg-animation">
         <div id="stars"></div>
         <div id="stars2"></div>

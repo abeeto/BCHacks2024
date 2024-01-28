@@ -1,5 +1,18 @@
 import React from 'react';
-import {sentimentsArrayForThisYear, countSentimentsForThisYear} from '../../Helpers/Helper'
+import { sentimentsArrayForThisYear, countSentimentsForThisYear } from '../../Helpers/Helper'
+import chroma from 'chroma-js';
+
+// CUSTOM COLOR STUFF
+const happyColor = localStorage.getItem('happyColor') || '#008000';
+const unhappyColor = localStorage.getItem('unhappyColor') || '#FF0000';
+const colorScale = chroma.scale([unhappyColor, happyColor]).mode('lch');
+
+// get 5 hex codes from the colour scale
+let happiest = colorScale(1).hex();
+let happy = colorScale(0.75).hex();
+let neutral = colorScale(0.5).hex();
+let unhappy = colorScale(0.25).hex();
+let unhappiest = colorScale(0).hex();
 
 // Example component to render a "contributions" grid
 const MoodGrid: React.FC = () => {
@@ -12,13 +25,16 @@ const MoodGrid: React.FC = () => {
 
   // Function to determine the color based on the contribution count
   const colorForCount = (count: number) => {
-    if (isNaN(count)) return 'bg-slate-600'
-    if (count <= -7) return 'bg-red-600';
-    if (count <= -4) return 'bg-red-500';
-    if (count === 0) return 'bg-stone-400'; // no contributions
-    if (count <= 4) return 'bg-blue-400'; // 1-9 contributions
-    return 'bg-blue-600'; // 30+ contributions
-  };
+    let color;
+    if (isNaN(count)) color = '#374151'; // bg-slate-600
+    else if (count <= -7) color = unhappiest;
+    else if (count <= -4) color = unhappy;
+    else if (count === 0) color = neutral; // no contributions
+    else if (count <= 4) color = happy; // 1-9 contributions
+    else color = happiest; // 30+ contributions
+
+    return color;
+};
 
   return (
     <div className="bg-[#1E293B] p-4 text-white flex-row ml-2 mr-2">
@@ -31,8 +47,8 @@ const MoodGrid: React.FC = () => {
               return (
                 <div
                   key={dayIndex}
-                  className={`w-3 h-3 ${colorForCount(count)} rounded-sm`}
-                  style={{ opacity: isNaN(count) ? 0.3 : 1 }}
+                  className={`w-3 h-3 rounded-sm`}
+                  style={{ opacity: isNaN(count) ? 0.3 : 1, backgroundColor: colorForCount(count) }}
                 />
               );
             })}
@@ -44,7 +60,7 @@ const MoodGrid: React.FC = () => {
         <div className="flex items-center">
           <span className="text-xs text-gray-400 mr-2">Negative</span>
           <div className="flex gap-1">
-            {[-7,-4,0,4,7].map((_, i) => (
+            {[-7, -4, 0, 4, 7].map((_, i) => (
               <div key={i} className={`w-3 h-3 ${colorForCount(_)} rounded-sm`} />
             ))}
           </div>

@@ -7,21 +7,21 @@ const MoodGrid: React.FC = () => {
   const days = 7;
 
   // Generate an example data set with random contributions count for each day
-  const data = Array.from({ length: weeks * days }, () => Math.floor(Math.random() * 21) - 10);
+  const data = [0, NaN, 7, 2, -7];
 
   // Function to determine the color based on the contribution count
   const colorForCount = (count: number) => {
     if (isNaN(count)) return 'bg-slate-600'
-    if (count <= -7) return 'bg-red-600';
-    if (count <= -4) return 'bg-amber-500';
-    if (count === 0) return 'bg-yellow-300'; // no contributions
-    if (count <= 4) return 'bg-green-400'; // 1-9 contributions
-    return 'bg-green-600'; // 30+ contributions
+    if (count <= -7) return 'bg-blue-600';
+    if (count <= -4) return 'bg-blue-500';
+    if (count === 0) return 'bg-stone-400'; // no contributions
+    if (count <= 4) return 'bg-red-400'; // 1-9 contributions
+    return 'bg-red-600'; // 30+ contributions
   };
 
   return (
     <div className="bg-[#1E293B] p-4 text-white flex-row ml-2 mr-2">
-      <div className="text-sm mb-2">98 contributions in 2024</div>
+      <div className="text-sm mb-2">XX contributions in 2024</div>
       <div className="flex gap-1.5 justify-center">
         {Array.from({ length: weeks }).map((_, weekIndex) => (
           <div key={weekIndex} className="flex flex-col gap-1.5">

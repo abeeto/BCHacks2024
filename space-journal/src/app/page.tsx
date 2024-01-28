@@ -12,7 +12,7 @@ import HobbyPage from "./hobby"
 import JournalPage from "./journal"
 import Dashboard from "./dashboard";
 import Insights from "./insights"
-import Nav from "./nav"
+import OldJournals from "./old-journals"
 import MoodGrid from "@/components/ui/moodGrid";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import ScrollDownButton from "@/components/ui/ScrollDownButton";
@@ -36,6 +36,7 @@ export default function Home() {
         setTimeout(() => setIsShaking(false), 1000);
       }
       setNextSection(sections[0].id)
+      console.log(nextSection)
     }
   };
 
@@ -50,7 +51,7 @@ export default function Home() {
   return (
     //flex min-h-screen flex-col items-center justify-between pb-24
     <main className="flex-col w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-      {nextSection !== "last" ? <ScrollDownButton targetId={nextSection} /> : <div></div>}
+      {nextSection !== "newlast" ? <ScrollDownButton targetId={nextSection} /> : <div></div>}
       <div className="fixed bottom-0 right-0 shake">
         <div
           style={{
@@ -67,7 +68,7 @@ export default function Home() {
       <Dashboard />
       <Insights />
       <ColorChanger />
-      <Nav />
+      <OldJournals/>
       <div className="bg-animation">
         <div id="stars"></div>
         <div id="stars2"></div>

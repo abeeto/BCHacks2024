@@ -4,9 +4,31 @@ import { Chart, registerables } from 'chart.js';
 import './styles/graphs.css';
 import MoodGrid from '@/components/ui/moodGrid';
 import { getJournalAtDate, getJournalEntries} from '../Helpers/Helper'
+import chroma from 'chroma-js';
 
 
 Chart.register(...registerables);
+
+
+// CUSTOM COLOR STUFF
+const happyColor = localStorage.getItem('happyColor') || '#008000';
+const unhappyColor = localStorage.getItem('unhappyColor') || '#FF0000';
+const colorScale = chroma.scale([unhappyColor, happyColor]).mode('lch');
+
+// Function to get border color based on data value
+const convertSentimentToColor = (sentiment: number, alpha?: number) => {
+    //return `rgba(${125 - (sentiment * 10)}, ${125 + (sentiment * 10)}, 0, ${sentiment ?? 1})`;
+    const color = colorScale(normaliseSentiment(sentiment)).rgba();
+    return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${alpha ?? 1})`;
+}
+
+//normalise the sentiment (a value between -20 and +20) to be between 0 and 1
+const normaliseSentiment = (sentiment: number) => {
+    return (sentiment + 20) / 40;
+}
+
+
+
 // dummy sentiment data
 let monthSentiments = [-5, -6.5, -2, 1, -1, 4, 6, 6, 2, -1, -2, 4, 6, 7];
 const last7DaysSentiments = [1, 4, 6, 8, 3, 5, 2];
@@ -83,7 +105,7 @@ const getSentimentLast12Months = () => {
         avg = avg / 30;
         monthAverage.push(avg);
     }
-    console.log(monthAverage);
+    //console.log(monthAverage);
     monthSentiments = monthAverage;
     return monthAverage;
 } 
@@ -98,17 +120,6 @@ function updateThisMonthData() {
         //monthSentiments[12] = monthSentiments[12] + (JSON.parse(getJournalAtDate(str) ?? "{}").sentiment / 28.0);
     }
     
-}
-
-
-// Function to get color based on data value
-const getColor = (value: number) => {
-    return `rgb(${125 - (value * 10)}, ${125 + (value * 10)}, 0)`;
-}
-
-// Function to get border color based on data value
-const getBorderColor = (value: number) => {
-    return `rgb(${125 - (value * 10)}, ${125 + (value * 10)}, 0)`;
 }
 
 const Dashboard = () => {
@@ -134,8 +145,8 @@ const Dashboard = () => {
             {
                 label: 'Sentiment',
                 data: monthSentiments,
-                backgroundColor: (context: { dataset: { data: { [x: string]: number; }; }; dataIndex: string | number; }) => getColor(context.dataset.data[context.dataIndex]),
-                borderColor: (context: { dataset: { data: { [x: string]: number; }; }; dataIndex: string | number; }) => getBorderColor(context.dataset.data[context.dataIndex]),
+                backgroundColor: (context: { dataset: { data: { [x: string]: number; }; }; dataIndex: string | number; }) => convertSentimentToColor(context.dataset.data[context.dataIndex]),
+                borderColor: (context: { dataset: { data: { [x: string]: number; }; }; dataIndex: string | number; }) => convertSentimentToColor(context.dataset.data[context.dataIndex]),
                 borderWidth: 3,
                 tension: 0.4,
             }
@@ -187,8 +198,8 @@ const Dashboard = () => {
             {
                 label: 'Sentiment',
                 data: getSentimentLast7Days(),
-                backgroundColor: (context: { dataset: { data: { [x: string]: number; }; }; dataIndex: string | number; }) => getColor(context.dataset.data[context.dataIndex]),
-                borderColor: (context: { dataset: { data: { [x: string]: number; }; }; dataIndex: string | number; }) => getBorderColor(context.dataset.data[context.dataIndex]),
+                backgroundColor: (context: { dataset: { data: { [x: string]: number; }; }; dataIndex: string | number; }) => convertSentimentToColor(context.dataset.data[context.dataIndex]),
+                borderColor: (context: { dataset: { data: { [x: string]: number; }; }; dataIndex: string | number; }) => convertSentimentToColor(context.dataset.data[context.dataIndex]),
                 borderWidth: 3,
                 tension: 0.4,
             }
@@ -243,7 +254,6 @@ const Dashboard = () => {
                 </div>
                 <MoodGrid/>
             </div>
-            <div className="section" id="last"></div>
         </div>
     );
 };

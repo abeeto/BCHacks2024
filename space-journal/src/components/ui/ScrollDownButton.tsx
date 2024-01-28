@@ -6,13 +6,12 @@ const ScrollDownButton = ({ targetId }) => {
   const scrollToTarget = () => {
     const target = document.getElementById(targetId);
     if (target) {
-      console.log(target.id)
       target.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <button
+    <button 
       onClick={scrollToTarget}
       style={{
         position: 'fixed',

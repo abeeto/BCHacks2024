@@ -11,11 +11,13 @@ import WelcomePage from "./hello"
 import HobbyPage from "./hobby"
 import JournalPage from "./journal"
 import Dashboard from "./dashboard";
+import Nav from "./nav"
 import MoodGrid from "@/components/ui/moodGrid";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import ScrollDownButton from "@/components/ui/ScrollDownButton";
 import { CardDemo } from "@/components/ui/card-demo";
 import Rocket from "@/../public/rocket.png"
+import ColorChanger from "./color-changer";
 export default function Home() {
   const [nextSection, setNextSection] = useState('hobby');
   const handleScroll = () => {
@@ -47,6 +49,8 @@ export default function Home() {
       <HobbyPage />
       <JournalPage />
       <Dashboard />
+      <ColorChanger />
+      <Nav/>
       <div className="bg-animation">
         <div id="stars"></div>
         <div id="stars2"></div>

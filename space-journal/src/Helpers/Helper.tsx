@@ -1,3 +1,4 @@
+import { Hobby } from '../app/types/Hobby';
 export function jumpToSection(sectionId: string) {
     var element = document.getElementById(sectionId);
     if (element) {
@@ -16,14 +17,10 @@ export function initLocalstorage(){
 }
 
 export function getHobbies(){
+  console.log("getting")
   return JSON.parse(localStorage.getItem('hobbies') ?? "[]");
 }
 
-export function addHobby(hobbyName: string){
-  let hobbies = getHobbies();
-  hobbies.push({name: hobbyName, count: 0});
+export function saveHobbies(hobbies: Hobby){
   localStorage.setItem('hobbies', JSON.stringify(hobbies));
-}
-export function incrementHobbyCount(){
-  localStorage.setItem('hobbyCount', (parseInt(localStorage.getItem('hobbyCount') ?? "0") + 1).toString());
 }

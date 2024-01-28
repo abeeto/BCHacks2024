@@ -14,8 +14,8 @@ const journal = () => {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between .h-screen w-4/5">
-      <div id="journal" className="align-top ">
+    <div id="journal" className="flex min-h-screen flex-col items-center justify-between .h-screen w-4/5">
+      <div className="align-top ">
         <h2 className='text-4xl pr-2'>What is on your mind?</h2>
         <TextEditor />
       </div>

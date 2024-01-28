@@ -21,6 +21,7 @@ import Rocket from "@/../public/rocket.png"
 import ColorChanger from "./color-changer";
 export default function Home() {
   const [nextSection, setNextSection] = useState('hobby');
+  const [isShaking, setIsShaking] = useState(false);
   const handleScroll = () => {
     // Obtain the current scroll position
     const scrollPosition = window.pageYOffset;
@@ -29,7 +30,13 @@ export default function Home() {
     const sections = Array.from(document.querySelectorAll('.section'))
       .filter(section => section.offsetTop >= (scrollPosition + 100))
       .sort((a, b) => a.offsetTop - b.offsetTop);
-    if(sections.length > 0) setNextSection(sections[0].id)
+    if (sections.length > 0) {
+      if (sections[0].id !== nextSection) {
+        setIsShaking(true);
+        setTimeout(() => setIsShaking(false), 1000);
+      }
+      setNextSection(sections[0].id)
+    }
   };
 
   // Add and remove the scroll event listener when the component mounts/unmounts
@@ -45,17 +52,22 @@ export default function Home() {
     <main className="flex-col w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
       {nextSection !== "last" ? <ScrollDownButton targetId={nextSection} /> : <div></div>}
       <div className="fixed bottom-0 right-0 shake">
-  <div>
-    <Image src={Rocket} width={100} height={100} alt="Description" />
-  </div>
-</div>
+        <div
+          style={{
+            animation: isShaking ? 'shake 0.5s ease-in-out infinite' : 'none',
+            display: 'inline-block'
+          }}
+        >
+          <Image src={Rocket} width={100} height={100} alt="Description" />
+        </div>
+      </div>
       <WelcomePage />
       <HobbyPage />
       <JournalPage />
       <Dashboard />
-      <Insights/>
+      <Insights />
       <ColorChanger />
-      <Nav/>
+      <Nav />
       <div className="bg-animation">
         <div id="stars"></div>
         <div id="stars2"></div>

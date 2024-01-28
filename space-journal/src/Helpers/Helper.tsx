@@ -238,4 +238,12 @@ export function calculateRegressionForLast30Days() {
     return { regressionResult: result, predictedSentiment };
 }
 
+export function formatToTwoDecimals(number) {
+  // Use toFixed to round to two decimals
+  const formattedNumber = Number(number).toFixed(2);
+  
+  // Convert back to number to remove trailing zeros
+  return Number(formattedNumber);
+}
+
 

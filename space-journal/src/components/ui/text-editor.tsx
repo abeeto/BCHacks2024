@@ -14,6 +14,9 @@ if (storedJournalEntries.includes(str)) {
     prevJournal = JSON.parse(getJournalAtDate(str) ?? "{}").text;
 }
 
+const happyColor = localStorage.getItem('happyColor') || '#008000';
+const unhappyColor = localStorage.getItem('unhappyColor') || '#FF0000';
+
 // Function to get border color based on data value
 const convertSentimentToColor = (value: number, alpha?: number) => {
     return `rgba(${125 - (value * 10)}, ${125 + (value * 10)}, 0, ${alpha ?? 1})`;

@@ -169,7 +169,8 @@ of the default styles for the quill editor (specifically the "snow" styles). */
 }
 
 #journal .ql-editor {
-    background-color: #1c1b22;
+    background-color: #1E293B;
+    opacity: 0.9;
     z-index: 999;
     position: relative;
     border-radius: 0 0 12px 12px;

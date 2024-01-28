@@ -8,6 +8,7 @@ import {
 import WelcomePage from "./hello"
 import HobbyPage from "./hobby"
 import JournalPage from "./journal"
+import Dashboard from "./dashboard";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { CardDemo } from "@/components/ui/card-demo";
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <WelcomePage/>
       <HobbyPage/>
       <JournalPage/>
+      <Dashboard/>
       <div className="bg-animation">
         <div id="stars"></div>
         <div id="stars2"></div>

@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Chart, registerables } from 'chart.js';
 import './styles/graphs.css';
 import MoodGrid from '@/components/ui/moodGrid';
@@ -7,7 +7,6 @@ import { getJournalAtDate, getJournalEntries} from '../Helpers/Helper'
 
 
 Chart.register(...registerables);
-
 // dummy sentiment data
 let monthSentiments = [-5, -6.5, -2, 1, -1, 4, 6, 6, 2, -1, -2, 4, 6, 7];
 const last7DaysSentiments = [1, 4, 6, 8, 3, 5, 2];
@@ -57,7 +56,7 @@ const getSentimentLast7Days = () => {
         date.setDate(date.getDate() - 1);
     }
     return sentiments;
-}
+} 
 
 function updateThisMonthData() {
     // just update the data for the current month
@@ -146,6 +145,12 @@ const Dashboard = () => {
             }
         ],
     };
+    var date = new Date();
+    const str = "" + date.getFullYear() + date.getMonth() + date.getDate();
+    const [senti, setSenti] = useState(getJournalAtDate(str));
+    if(getJournalAtDate(str) != senti){
+        setSenti(getJournalAtDate(str));
+    }
     useEffect(() => {
         if (chartContainer2 && chartContainer2.current) {
             if (chartRef2.current) {
@@ -162,14 +167,15 @@ const Dashboard = () => {
                         
                     },
                     animation: {
-                        duration:0
+                        easing: 'linear',
+                        duration: 1000
                     }
                 }
             });
 
             chartRef2.current = newChartInstance2;
         }
-    }, [sentimentData2]);
+    }, [senti]);
     return (
         <div className="flex min-h-screen flex-col items-center justify-between .h-screen w-4/5">
             <div id="d" className="section align-top"></div>

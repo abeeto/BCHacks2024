@@ -168,7 +168,7 @@ const Dashboard = () => {
                     },
                     animation: {
                         easing: 'linear',
-                        duration: 1000
+                        duration: 500
                     }
                 }
             });

@@ -18,6 +18,7 @@ const journal = () => {
       <div id="jj" className="section align-top"></div>
       <div className="">
         <h2 className='text-4xl pr-2 mb-5'>What is on your mind?</h2>
+        <div className="text-xl text-center border-blue-300 border-2 bg-slate-900 p-5 py-4 mb-5 rounded-lg"> Your journal entry is auto saved.</div>
         <TextEditor />
       </div>
       <div></div>

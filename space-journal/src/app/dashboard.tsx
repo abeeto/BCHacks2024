@@ -11,8 +11,6 @@ Chart.register(...registerables);
 let monthSentiments = [-5, -6.5, -2, 1, -1, 4, 6, 6, 2, -1, -2, 4, 6, 7];
 const last7DaysSentiments = [1, 4, 6, 8, 3, 5, 2];
 
-// journal entries data (just do .sentiment for the sentiment values)
-const storedJournalEntries = getJournalEntries();
 
 // Function to get month name from a Date object
 const getMonthName = (date: Date) => {
@@ -43,6 +41,8 @@ const generateLast7Days = () => {
 }
 
 const getSentimentLast7Days = () => {
+    // journal entries data (just do .sentiment for the sentiment values)
+    const storedJournalEntries = getJournalEntries();
     const sentiments = [];
     let date = new Date();
     for (let i = 0; i < 7; i++) {
@@ -59,6 +59,8 @@ const getSentimentLast7Days = () => {
 } 
 
 function updateThisMonthData() {
+    // journal entries data (just do .sentiment for the sentiment values)
+    const storedJournalEntries = getJournalEntries();
     // just update the data for the current month
     const date = new Date();
     const str = "" + date.getFullYear() + date.getMonth() + date.getDate();

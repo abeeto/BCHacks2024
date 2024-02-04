@@ -86,7 +86,7 @@ export default function OldJournals() {
                     </PopoverContent>
                 </Popover>
                 <Card className="flex">
-                    <CardContent className='p-0 px-2 pt-2 pb-0 w-40 text-s align-center'>{sentiment ? sentiment: "Sentiment Score"}</CardContent>
+                    <CardContent className='p-0 px-2 pt-2 pb-0 w-40 text-s text-center align-center'>{sentiment ? "Sentiment: " + sentiment: "No Score"}</CardContent>
                 </Card>
             </div> 
             <Card>
